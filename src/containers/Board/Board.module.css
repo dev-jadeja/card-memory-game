@@ -1,0 +1,38 @@
+.Board {
+    height: 600px;
+    width: 1000px;
+    border: 1px solid red;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+	justify-content: space-around;
+	flex-wrap: wrap;
+}
+
+@media (min-width: 800px) and (max-width: 1020px) {
+    .Board {
+        height: 700px;
+        width: 750px;  
+    }
+}
+
+@media (min-width: 600px) and (max-width: 799px) {
+    .Board {
+        height: 1050px;
+        width: 550px;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 599px) {
+    .Board {
+        height: 1500px;
+        width: 350px;
+    }
+}
+
+@media (max-width: 399px) {
+    .Board {
+        height: 2100px;
+        width: 250px
+    }
+}

@@ -1,8 +1,9 @@
 import React from "react";
-import classes from "./App.module.css";
+// import Card from './components/Card/Card';
+import Board from './containers/Board/Board';
 
-const app = () => {
-	return <div className={classes.test}>hello</div>;
-};
+function App() {
+  return <Board />;
+}
 
-export default app;
+export default App;
