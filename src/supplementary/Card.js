@@ -1,7 +1,7 @@
 class Card {
-    constructor(flipped, text, solved, identifier) {
+    constructor(flipped, color, solved, identifier) {
         this.flipped = flipped;
-        this.text = text;
+        this.color = color;
         this.solved = solved;
         this.identifier = identifier;
         this.id = 0;

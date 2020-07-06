@@ -6,11 +6,18 @@ function Card(props) {
 		<div className={classes.Container} onClick={props.clicked}>
 			<div
 				className={`${classes.Body} ${
-					props.isFlipped || props.isSolved ? classes.BodyIsFlipped : ""
+					props.isFlipped || props.isSolved
+						? classes.BodyIsFlipped
+						: ""
 				}`}
 			>
-				<div className={classes.Front}>{props.content}</div>
-				<div className={classes.Back}>{props.content}</div>
+				<div
+					className={classes.Front}
+					style={{
+						backgroundColor: props.color,
+					}}
+				></div>
+				<div className={classes.Back}>{props.color}</div>
 			</div>
 		</div>
 	);
