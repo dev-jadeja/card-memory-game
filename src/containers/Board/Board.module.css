@@ -2,7 +2,7 @@
 	background: #141e30;
 	background: -webkit-linear-gradient(to left, #243b55, #141e30);
 	background: linear-gradient(to left, #243b55, #141e30);
-
+	/* width: 100%; */
 	height: 100vh;
 }
 
@@ -21,12 +21,18 @@
 		height: 700px;
 		width: 750px;
 	}
+	.Body {
+		height: 100%;
+	}
 }
 
 @media (min-width: 600px) and (max-width: 799px) {
 	.Board {
 		height: 1050px;
 		width: 550px;
+	}
+	.Body {
+		height: 100%;
 	}
 }
 
@@ -35,11 +41,17 @@
 		height: 1500px;
 		width: 350px;
 	}
+	.Body {
+		height: 100%;
+	}
 }
 
 @media (max-width: 399px) {
 	.Board {
 		height: 2100px;
 		width: 250px;
+	}
+	.Body {
+		height: 100%;
 	}
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import Auth from "../Auth/Auth";
+import Auth from "../../containers/Auth/Auth";
 import classes from "./LandingPage.module.css";
 
 function LandingPage() {

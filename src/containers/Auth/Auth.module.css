@@ -1,33 +1,24 @@
-.Box {
-	width: 300px;
-	padding: 40px;
-	background: #200000;
-	text-align: center;
-	font-family: "Roboto";
+.Container {
+	width: 400px;
+	height: 400px;
+	overflow: hidden;
 }
 
-.Heading {
-	color: white;
-	text-transform: uppercase;
-	font-weight: 500;
+.Out {
+	transform: translateY(50px);
+	transition: all 0.5s ease-out;
 }
 
-.Btn {
-	border: 0;
-	background: none;
-	display: block;
-	margin: 20px auto;
-	text-align: center;
-	border: 2px solid #2ecc71;
-	padding: 14px 40px;
-	outline: none;
-	color: white;
-	border-radius: 24px;
-	transition: 0.25s;
-	cursor: pointer;
+.In {
+	transform: translateY(-400px);
+	transition: all 0.5s ease-out;
 }
 
-.Btn:hover {
-	background: #2ecc71;
+.Up {
+	transform: translateY(-400px);
+	transition: all 0.5s ease-out;
 }
 
+.Normal {
+	transition: all 0.5s ease-out;
+}

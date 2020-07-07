@@ -1,0 +1,113 @@
+.Body {
+	background: #abbaab;
+	background: -webkit-linear-gradient(to top, #ffffff, #abbaab);
+	background: linear-gradient(to top, #ffffff, #abbaab);
+	height: 100%;
+	font-family: "Ubuntu", sans-serif;
+	text-align: center;
+}
+
+.Greeting {
+	font-weight: 700;
+	font-size: 50px;
+}
+
+.Levels {
+	margin: 10px auto;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.Levels button {
+	margin: 10px 20px;
+	width: 120px;
+	height: 40px;
+	border-radius: 10px;
+	outline: none;
+	font-family: "Ubuntu", sans-serif;
+	font-weight: 700;
+	background-color: rgb(243, 243, 243);
+	cursor: pointer;
+}
+
+.EasyBtn {
+	border: 3px solid green;
+	color: green;
+	transition: 0.1s;
+}
+
+.EasyBtn:hover {
+	background-color: green;
+	color: white;
+	transform: scale(1.1);
+}
+
+.MediumBtn {
+	border: 3px solid rgb(52, 52, 180);
+	color: rgb(52, 52, 180);
+	transition: 0.1s;
+}
+
+.MediumBtn:hover {
+	background-color: rgb(52, 52, 180);
+	color: white;
+	transform: scale(1.1);
+}
+.HardBtn {
+	border: 3px solid orangered;
+	color: orangered;
+	transition: 0.1s;
+}
+
+.HardBtn:hover {
+	background-color: orangered;
+	transform: scale(1.1);
+	color: white;
+}
+
+.ScoreBoard ul {
+	list-style: circle;
+	margin: 0 auto;
+	width: 450px;
+	box-sizing: border-box;
+	background-color: #191919;
+}
+
+.ScoreBoard ul li {
+	padding: 9px;
+	border: 1px solid lighrgray;
+	text-align: left;
+	display: flex;
+    color: white;
+    justify-content: space-between;
+}
+
+.ScoreBoard ul li:nth-child(1) {
+	background: rgba(255, 255, 255, 0.3);
+}
+
+.ScoreBoard ul li:nth-child(2) {
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.ScoreBoard ul li:nth-child(3) {
+	background: rgba(255, 255, 255, 0.1);
+}
+
+.ScoreBoard ul li span:nth-child(1) {
+    width: 200px;
+    text-align: left;
+}
+
+.ScoreBoard ul li span:nth-child(2) {
+    width: 100px;
+    text-align: left;
+}
+
+@media (max-width: 500px) {
+	.ScoreBoard ul {
+		width: initial;
+	}
+}

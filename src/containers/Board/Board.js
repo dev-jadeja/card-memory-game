@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import cardsGenerator from "../../supplementary/CardsGenerator";
 import classes from "./Board.module.css";
 import Card from "../../components/Card/Card";
-import Dialog from "../../components/UI/Dialog/Dialog";
+import Dialog from "../../UI/Dialog/Dialog";
 
 function Board() {
 	const [cardList, setCardList] = useState(cardsGenerator());
@@ -54,7 +54,7 @@ function Board() {
 		setCardList(updatedCardList);
 	};
 
-	const dialog = cardsSolved === 24 ? <Dialog score={score} /> : null;
+	const dialog = cardsSolved === 4 ? <Dialog score={score} /> : null;
 
 	return (
 		<React.Fragment>
