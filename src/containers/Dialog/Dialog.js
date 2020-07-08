@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -7,56 +7,33 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 import { Redirect } from "react-router-dom";
-import axios from "../../axios-score";
-import Spinner from "../Spinner/Spinner";
+import Spinner from "../../UI/Spinner/Spinner";
+import * as actions from "../../store/actions/index";
+import { connect } from "react-redux";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function AlertDialogSlide(props) {
-	const [backToHome, setBackToHome] = useState(false);
-	const [error, setError] = useState(false);
-	const [loading, setLoading] = useState(false);
-
+function AlertDialogSlide(props) {
 	const clickedBackToHome = () => {
-		setLoading(true);
-		const fullDate = new Date();
-
-		const score = {
-			moves: props.score,
-			date: `${fullDate.getDate()}/${
-				fullDate.getMonth() + 1
-			}/${fullDate.getFullYear()}`,
-		};
-
-		axios
-			.post("/scores.json", score)
-			.then((res) => {
-				setBackToHome(true);
-				setLoading(false);
-			})
-			.catch((err) => {
-				setLoading(false);
-				setError(true);
-				setTimeout(() => setBackToHome(true), 5000);
-			});
+		props.clickedToHome(props.score, props.token, props.userId);
 	};
 
 	let modal = (
 		<React.Fragment>
 			<DialogTitle id="alert-dialog-slide-title">
-				{error ? null : "Congratulations!"}
+				{props.error ? null : "Congratulations!"}
 			</DialogTitle>
 			<DialogContent>
 				<DialogContentText id="alert-dialog-slide-description">
-					{error
+					{props.error
 						? "Some error occured to store the score. You will be redirected to the home page in 5 seconds"
 						: `You completed the game in ${props.score} moves.`}
 				</DialogContentText>
 			</DialogContent>
 			<DialogActions>
-				{error ? null : (
+				{props.error ? null : (
 					<Button onClick={clickedBackToHome} color="primary">
 						BACK TO HOME PAGE
 					</Button>
@@ -65,14 +42,17 @@ export default function AlertDialogSlide(props) {
 		</React.Fragment>
 	);
 
-	if (loading) {
+	if (props.loading) {
 		modal = <Spinner />;
 	}
 
+	let homeRedirect = null;
+	if(props.backToHome) 
+		homeRedirect = <Redirect to="/home" />
+
 	return (
 		<div>
-			{backToHome ? <Redirect to="/home" /> : null}
-
+			{homeRedirect}
 			<Dialog
 				open={true}
 				TransitionComponent={Transition}
@@ -85,3 +65,22 @@ export default function AlertDialogSlide(props) {
 		</div>
 	);
 }
+
+const mapStateToProps = (state) => {
+	return {
+		error: state.list.error,
+		backToHome: state.list.backToHome,
+		loading: state.list.loading,
+		token: state.auth.token,
+		userId: state.auth.userId,
+	};
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		clickedToHome: (score, token, userId) =>
+			dispatch(actions.sendScore(score, token, userId)),
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AlertDialogSlide);

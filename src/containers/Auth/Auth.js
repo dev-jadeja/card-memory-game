@@ -1,41 +1,41 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import classes from "./Auth.module.css";
 import Form from "../Form/Form";
 
 function Auth() {
 	const [loginActive, setLoginActive] = useState(true);
+	const [isClicked, setIsClicked] = useState(false);
 
 	const toggleFormHandler = () => {
-		setLoginActive(!loginActive);
+		setIsClicked(true);
+		setTimeout(() => {
+			setLoginActive(!loginActive);
+			setIsClicked(false);
+		}, 200);
 	};
 
-	let loginClass = null;
-	let registerClass = null;
+	let form;
 
-	if(loginActive) {
-		registerClass = classes.Out;
-		loginClass = classes.Normal;
-	}
-
-	else {
-		loginClass = classes.Up;
-		registerClass = classes.In;
-	}
-
-	return (
-		<div className={classes.Container}>
-			<div className={loginClass}>
+	if (loginActive) {
+		form = (
+			<div className={`${isClicked ? classes.Squeeze : classes.Enlarge}`}>
 				<Form formType="LOGIN" clicked={toggleFormHandler}>
 					Create a new account
 				</Form>
 			</div>
-			<div className={registerClass}>
+		);
+	} else {
+		form = (
+			<div className={`${isClicked ? classes.Squeeze : classes.Enlarge}`}>
 				<Form formType="REGISTER" clicked={toggleFormHandler}>
 					Login with your account
 				</Form>
 			</div>
-		</div>
-	);
+		);
+	}
+
+	return <div className={classes.Container}>{form}</div>;
 }
+
 
 export default Auth;

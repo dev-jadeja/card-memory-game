@@ -1,55 +1,49 @@
-import React, { useState, useEffect } from "react";
-import axios from "../../../axios-score";
+import React, { useEffect } from "react";
 import Spinner from "../../../UI/Spinner/Spinner";
+import * as actions from "../../../store/actions/index";
+import { connect } from "react-redux";
 
-function ScoreBoard() {
-	const [scoreList, setScoreList] = useState([]);
-	const [loading, setLoading] = useState(true);
-
+function ScoreBoard(props) {
 	useEffect(() => {
-		axios
-			.get("/scores.json")
-			.then((res) => {
-				let fetchedScoreList = [];
-				for (let key in res.data) {
-					fetchedScoreList.push({
-						key: key,
-						...res.data[key],
-					});
-				}
-
-				fetchedScoreList.sort((prev, next) => {
-					return prev.moves > next.moves ? 1 : -1;
-				});
-
-				if (fetchedScoreList.length > 10)
-					fetchedScoreList.splice(10, fetchedScoreList.length - 10);
-				setScoreList(fetchedScoreList);
-				console.log(fetchedScoreList);
-				setLoading(false);
-			})
-			.catch((err) => console.log(err));
+		props.onFetchList(props.token, props.userId);
 	}, []);
 
-	let list = (
-		<ul>
-			{scoreList.map((scoreCard) => {
-				return (
-					<li key={scoreCard.key}>
-						<span>{scoreCard.moves} moves</span>
-						<span>
-							<i className="far fa-calendar-alt"></i>{" "}
-							{scoreCard.date}
-						</span>
-					</li>
-				);
-			})}
-		</ul>
-	);
+	let list = <Spinner />;
 
-	if (loading) list = <Spinner />;
+	if (!props.loading)
+		list = (
+			<ul>
+				{props.scoreList.map((scoreCard) => {
+					return (
+						<li key={scoreCard.key}>
+							<span>{scoreCard.moves} moves</span>
+							<span>
+								<i className="far fa-calendar-alt"></i>{" "}
+								{scoreCard.date}
+							</span>
+						</li>
+					);
+				})}
+			</ul>
+		);
 
 	return list;
 }
 
-export default ScoreBoard;
+const mapStateToProps = (state) => {
+	return {
+		scoreList: state.list.scoreList,
+		loading: state.list.loading,
+		token: state.auth.token,
+		userId: state.auth.userId,
+	};
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onFetchList: (token, userId) =>
+			dispatch(actions.fetchScoreBoard(token, userId)),
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ScoreBoard);

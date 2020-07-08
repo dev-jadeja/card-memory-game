@@ -7,9 +7,24 @@
 	text-align: center;
 }
 
-.Greeting {
+.Logout {
+	border: 3px solid brown;
+	color: brown;
+	margin: 30px auto;
+	width: 120px;
+	height: 40px;
+	border-radius: 10px;
+	outline: none;
+	font-family: "Ubuntu", sans-serif;
 	font-weight: 700;
-	font-size: 50px;
+	cursor: pointer;
+	transition: 0.1s;
+}
+
+.Logout:hover {
+	background-color: brown;
+	color: white;
+	transform: scale(1.1);
 }
 
 .Levels {

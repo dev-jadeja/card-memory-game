@@ -32,3 +32,9 @@
 	background-image: url("../../assets/BackSide.jpeg");
 	background-position: center;
 }
+
+@media (max-width: 915px) {
+	.Body {
+		height: 100%;
+	}
+}

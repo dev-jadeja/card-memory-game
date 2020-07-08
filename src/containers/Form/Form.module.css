@@ -6,6 +6,10 @@
 	font-family: "Roboto";
 }
 
+.Box p {
+	color: rgb(255, 136, 0);
+}
+
 .Heading {
 	color: white;
 	text-transform: uppercase;

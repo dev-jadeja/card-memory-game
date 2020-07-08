@@ -1,24 +1,25 @@
 .Container {
-	width: 400px;
+	width: 380px;
 	height: 400px;
 	overflow: hidden;
 }
 
-.Out {
-	transform: translateY(50px);
-	transition: all 0.5s ease-out;
+.Squeeze {
+	transform: scaleX(0);
+	transition: 200ms ease-out;
 }
 
-.In {
-	transform: translateY(-400px);
-	transition: all 0.5s ease-out;
+@keyframes slidein {
+	from {
+		transform: scaleX(0%);
+	}
+
+	to {
+		transform: scaleX(100%);
+	}
 }
 
-.Up {
-	transform: translateY(-400px);
-	transition: all 0.5s ease-out;
-}
-
-.Normal {
-	transition: all 0.5s ease-out;
+.Enlarge {
+	transform: slidein;
+	transition: 200ms ease-out;
 }

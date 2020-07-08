@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import cardsGenerator from "../../supplementary/CardsGenerator";
 import classes from "./Board.module.css";
 import Card from "../../components/Card/Card";
-import Dialog from "../../UI/Dialog/Dialog";
+import Dialog from "../Dialog/Dialog";
 
 function Board() {
 	const [cardList, setCardList] = useState(cardsGenerator());
@@ -28,14 +28,16 @@ function Board() {
 		} else {
 			setClickable(false);
 			setTimeout(() => {
+				setClickable(true);
+			}, 1700);	
+			setTimeout(() => {
 				const updatedCardList = cardList.map((card) => ({ ...card }));
 				updatedCardList[firstSelectedId].flipped = false;
 				updatedCardList[secondSelectedId].flipped = false;
 				setCardList(updatedCardList);
 				setFirstSelectedId(-1);
 				setSecondSelectedId(-1);
-				setClickable(true);
-			}, 1000);
+			}, 1000);	
 		}
 	}, [cardList, firstSelectedId, secondSelectedId, cardsSolved]);
 
