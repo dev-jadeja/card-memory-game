@@ -6,6 +6,7 @@ const initialState = {
     loading: false,
     backToHome: false,
     error: false,
+    level: 'color',
 };
 
 const fetchScoreBoardSuccess = (state, action) => {
@@ -55,6 +56,18 @@ const sendScoreFailHome = (state, action) => {
     })
 }
 
+const setBackToHome = (state, action) => {
+    return updateObject(state, {
+        backToHome: false,
+    })
+}
+
+const setLevel = (state, action) => {
+    return updateObject(state, {
+        level: action.level,
+    })
+}
+
 const reducer = (state = initialState, action) => {
     switch(action.type) {
         case actionTypes.FETCH_SCORE_BOARD_START:
@@ -71,6 +84,10 @@ const reducer = (state = initialState, action) => {
             return sendScoreFail(state, action);
         case actionTypes.SEND_SCORE_FAIL_HOME:
             return sendScoreFailHome(state, action);
+        case actionTypes.SET_BACK_TO_HOME:
+            return setBackToHome(state, action);
+        case actionTypes.SET_LEVEL:
+            return setLevel(state, action);
         default: 
             return state;
     }

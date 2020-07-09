@@ -2,6 +2,22 @@ import React from "react";
 import classes from "./Card.module.css";
 
 function Card(props) {
+
+	let style;
+
+	if(props.type === 'color') {
+		style = {
+			backgroundColor: props.color,
+		}
+	}
+	else {
+		style = {
+			backgroundImage: `url("${props.link}")`,
+			backgroundPosition: "center",
+			backgroundSize: "cover",
+		}
+	}
+
 	return (
 		<div className={classes.Container} onClick={props.clicked}>
 			<div
@@ -13,11 +29,9 @@ function Card(props) {
 			>
 				<div
 					className={classes.Front}
-					style={{
-						backgroundColor: props.color,
-					}}
+					style={style}
 				></div>
-				<div className={classes.Back}>{props.color}</div>
+				<div className={classes.Back}></div>
 			</div>
 		</div>
 	);

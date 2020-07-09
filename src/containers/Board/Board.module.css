@@ -26,7 +26,7 @@
 	}
 }
 
-@media (min-width: 600px) and (max-width: 799px) {
+@media (min-width: 620px) and (max-width: 799px) {
 	.Board {
 		height: 1050px;
 		width: 550px;
@@ -36,10 +36,10 @@
 	}
 }
 
-@media (min-width: 400px) and (max-width: 599px) {
+@media (min-width: 400px) and (max-width: 619px) {
 	.Board {
 		height: 1500px;
-		width: 350px;
+		width: 380px;
 	}
 	.Body {
 		height: 100%;

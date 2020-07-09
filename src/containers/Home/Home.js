@@ -1,37 +1,32 @@
 import React, { useState } from "react";
 import classes from "./Home.module.css";
 import ScoreBoard from "./ScoreBoard/ScoreBoard";
-import { Redirect } from "react-router-dom";
+import { Redirect, NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 
 function Home(props) {
-	const [clicked, setClicked] = useState(false);
 	const [logout, setLogout] = useState(false);
-
-	const btnClicked = () => {
-		setClicked(true);
-	};
 
 	const logoutClicked = () => {
 		props.onLogout();
 		setLogout(true);
 	};
 
+	const toggleLevelScore = (type) => {
+		if(type === props.level)
+			return;
+		props.onSetLevel(type);
+	}
+
 	let logoutRedirect = null;
 	if (logout) {
 		logoutRedirect = <Redirect to="/" />;
 	}
 
-	let gameRedirect = null;
-	if (clicked) {
-		gameRedirect = <Redirect to="/game" />;
-	}
-
 	return (
 		<div className={classes.Body}>
 			{logoutRedirect}
-			{gameRedirect}
 			<button className={classes.Logout} onClick={logoutClicked}>
 				LOGOUT
 			</button>
@@ -43,29 +38,49 @@ function Home(props) {
 				choose difficulty level
 			</div>
 			<div className={classes.Levels}>
-				<button className={classes.EasyBtn} onClick={btnClicked}>
-					EASY
-				</button>
-				<button className={classes.MediumBtn} onClick={btnClicked}>
-					MEDIUM
-				</button>
-				<button className={classes.HardBtn} onClick={btnClicked}>
-					HARD
-				</button>
+				<NavLink to="/game1">EASY</NavLink>
+				<NavLink to="/game2">HARD</NavLink>
 			</div>
 
 			<div className={classes.ScoreBoard}>
-				<h2>YOUR BEST GAMES</h2>
-				<ScoreBoard />
+				<h2>YOUR TOP 10 GAMES</h2>
+				<button
+					onClick={() => toggleLevelScore("color")}
+					className={`${
+						props.level === "color"
+							? classes.ScoreBtnClicked
+							: classes.ScoreBtn
+					}`}
+				>
+					EASY
+				</button>
+				<button
+					onClick={() => toggleLevelScore("card")}
+					className={`${
+						props.level === "card"
+							? classes.ScoreBtnClicked
+							: classes.ScoreBtn
+					}`}
+				>
+					HARD
+				</button>
+				<ScoreBoard level={props.level} />
 			</div>
 		</div>
 	);
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
 	return {
-		onLogout: () => dispatch(actions.logout()),
+		level: state.list.level,
 	};
 };
 
-export default connect(null, mapDispatchToProps)(Home);
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onLogout: () => dispatch(actions.logout()),
+		onSetLevel: (level) => dispatch(actions.setLevel(level)),
+	};
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home));

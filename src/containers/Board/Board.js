@@ -3,14 +3,31 @@ import cardsGenerator from "../../supplementary/CardsGenerator";
 import classes from "./Board.module.css";
 import Card from "../../components/Card/Card";
 import Dialog from "../Dialog/Dialog";
+import { connect } from "react-redux";
+import * as actions from "../../store/actions/index";
+import Spinner from "../../UI/Spinner/Spinner";
 
-function Board() {
-	const [cardList, setCardList] = useState(cardsGenerator());
+function Board(props) {
+	const [cardList, setCardList] = useState(null);
 	const [firstSelectedId, setFirstSelectedId] = useState(-1);
 	const [secondSelectedId, setSecondSelectedId] = useState(-1);
 	const [clickable, setClickable] = useState(true);
 	const [score, setScore] = useState(0);
 	const [cardsSolved, setCardsSolved] = useState(0);
+	const [type, setType] = useState(null);
+
+	useEffect(() => {
+		props.prepAfterFinished();
+		const path = props.location.pathname;
+		if (path[path.length - 1] === "1") {
+			setCardList(cardsGenerator("color"));
+			setType("color");
+		} else {
+			setCardList(cardsGenerator("card"));
+			setType("card");
+		}
+		setCardList(cardsGenerator());
+	}, []);
 
 	useEffect(() => {
 		if (firstSelectedId === -1 || secondSelectedId === -1) return;
@@ -28,16 +45,16 @@ function Board() {
 		} else {
 			setClickable(false);
 			setTimeout(() => {
-				setClickable(true);
-			}, 1700);	
-			setTimeout(() => {
 				const updatedCardList = cardList.map((card) => ({ ...card }));
 				updatedCardList[firstSelectedId].flipped = false;
 				updatedCardList[secondSelectedId].flipped = false;
-				setCardList(updatedCardList);
 				setFirstSelectedId(-1);
 				setSecondSelectedId(-1);
-			}, 1000);	
+				setCardList(updatedCardList);
+				setTimeout(() => {
+					setClickable(true);
+				}, 720);
+			}, 1000);
 		}
 	}, [cardList, firstSelectedId, secondSelectedId, cardsSolved]);
 
@@ -56,15 +73,17 @@ function Board() {
 		setCardList(updatedCardList);
 	};
 
-	const dialog = cardsSolved === 4 ? <Dialog score={score} /> : null;
+	const dialog = cardsSolved === 24 ? <Dialog score={score} type={type} /> : null;
 
-	return (
-		<React.Fragment>
-			{dialog}
+	let board = <Spinner />;
+	if (cardList !== null && type !== null) {
+		board = (
 			<div className={classes.Body}>
 				<div className={classes.Board}>
 					{cardList.map((card) => (
 						<Card
+							type={type}
+							link={card.link}
 							isFlipped={card.flipped}
 							isSolved={card.solved}
 							color={card.color}
@@ -74,8 +93,21 @@ function Board() {
 					))}
 				</div>
 			</div>
+		);
+	}
+
+	return (
+		<React.Fragment>
+			{dialog}
+			{board}
 		</React.Fragment>
 	);
 }
 
-export default Board;
+const mapDispatchToProps = (dispatch) => {
+	return {
+		prepAfterFinished: () => dispatch(actions.setBackToHome()),
+	};
+};
+
+export default connect(null, mapDispatchToProps)(Board);

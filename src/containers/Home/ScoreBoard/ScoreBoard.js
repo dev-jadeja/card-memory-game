@@ -5,8 +5,8 @@ import { connect } from "react-redux";
 
 function ScoreBoard(props) {
 	useEffect(() => {
-		props.onFetchList(props.token, props.userId);
-	}, []);
+		props.onFetchList(props.token, props.userId, props.level);
+	}, [props.level]);
 
 	let list = <Spinner />;
 
@@ -36,13 +36,14 @@ const mapStateToProps = (state) => {
 		loading: state.list.loading,
 		token: state.auth.token,
 		userId: state.auth.userId,
+		level: state.list.level
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onFetchList: (token, userId) =>
-			dispatch(actions.fetchScoreBoard(token, userId)),
+		onFetchList: (token, userId, level) =>
+			dispatch(actions.fetchScoreBoard(token, userId, level)),
 	};
 };
 

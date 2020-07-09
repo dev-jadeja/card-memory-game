@@ -16,8 +16,9 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 function AlertDialogSlide(props) {
+
 	const clickedBackToHome = () => {
-		props.clickedToHome(props.score, props.token, props.userId);
+		props.clickedToHome(props.score, props.token, props.userId, props.type);
 	};
 
 	let modal = (
@@ -78,8 +79,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		clickedToHome: (score, token, userId) =>
-			dispatch(actions.sendScore(score, token, userId)),
+		clickedToHome: (score, token, userId, type) =>
+			dispatch(actions.sendScore(score, token, userId, type)),
 	};
 };
 

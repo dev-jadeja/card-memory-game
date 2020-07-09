@@ -1,3 +1,2 @@
 export { auth, logout, authCheckState } from "./auth";
-export { fetchScoreBoard } from "./scoreBoard";
-export { sendScore } from "./scoreBoard";
+export { fetchScoreBoard, sendScore, setBackToHome, setLevel } from "./scoreBoard";

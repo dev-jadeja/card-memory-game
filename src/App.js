@@ -14,7 +14,7 @@ function App(props) {
 
 	let routes = (
 		<Switch>
-			<Route path="/" component={LandingPage} />
+			<Route path="/" exact component={LandingPage} />
 			<Redirect to="/" />
 		</Switch>
 	);
@@ -22,7 +22,8 @@ function App(props) {
 	if (props.isAuthenticated) {
 		routes = (
 			<Switch>
-				<Route path="/game" component={Board} />
+				<Route path="/game1" component={Board} />
+				<Route path="/game2" component={Board}/>
 				<Route path="/home" component={Home} />
 				<Redirect to="/home" />
 			</Switch>

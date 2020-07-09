@@ -10,7 +10,7 @@
 .Logout {
 	border: 3px solid brown;
 	color: brown;
-	margin: 30px auto;
+	margin: 25px auto;
 	width: 120px;
 	height: 40px;
 	border-radius: 10px;
@@ -35,51 +35,75 @@
 	justify-content: center;
 }
 
-.Levels button {
+.Levels a {
 	margin: 10px 20px;
-	width: 120px;
-	height: 40px;
-	border-radius: 10px;
+	width: 80px;
+	height: 20px;
+	border-radius: 7px;
 	outline: none;
 	font-family: "Ubuntu", sans-serif;
 	font-weight: 700;
 	background-color: rgb(243, 243, 243);
 	cursor: pointer;
+	text-decoration: none;
 }
 
-.EasyBtn {
+.Levels a:nth-child(1) {
 	border: 3px solid green;
 	color: green;
 	transition: 0.1s;
 }
 
-.EasyBtn:hover {
+.Levels a:nth-child(1):hover {
 	background-color: green;
 	color: white;
 	transform: scale(1.1);
 }
 
-.MediumBtn {
-	border: 3px solid rgb(52, 52, 180);
-	color: rgb(52, 52, 180);
-	transition: 0.1s;
-}
-
-.MediumBtn:hover {
-	background-color: rgb(52, 52, 180);
-	color: white;
-	transform: scale(1.1);
-}
-.HardBtn {
+.Levels a:nth-child(2) {
 	border: 3px solid orangered;
 	color: orangered;
 	transition: 0.1s;
 }
 
-.HardBtn:hover {
+.Levels a:nth-child(2):hover {
 	background-color: orangered;
 	transform: scale(1.1);
 	color: white;
+}
+
+.ScoreBoard button {
+	margin: 10px 20px;
+	width: 80px;
+	height: 30px;
+	border-radius: 7px;
+	outline: none;
+	font-family: "Ubuntu", sans-serif;
+	font-weight: 700;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.ScoreBoard button:focus {
+	border: 3px solid blue;
+	color: white;
+	background-color: blue;
+	transition: 0.1s;
+	transform: scale(1.1);
+}
+
+.ScoreBtn {
+	border: 3px solid blue;
+	color: blue;
+	transition: 0.1s;
+}
+
+.ScoreBtnClicked {
+	border: 3px solid blue;
+	color: white;
+	background-color: blue;
+	transition: 0.1s;
+	transform: scale(1.1);
 }
 
 .ScoreBoard ul {
@@ -91,12 +115,12 @@
 }
 
 .ScoreBoard ul li {
-	padding: 9px;
+	padding: 5px;
 	border: 1px solid lighrgray;
 	text-align: left;
 	display: flex;
-    color: white;
-    justify-content: space-between;
+	color: white;
+	justify-content: space-between;
 }
 
 .ScoreBoard ul li:nth-child(1) {
@@ -112,13 +136,13 @@
 }
 
 .ScoreBoard ul li span:nth-child(1) {
-    width: 200px;
-    text-align: left;
+	width: 200px;
+	text-align: left;
 }
 
 .ScoreBoard ul li span:nth-child(2) {
-    width: 100px;
-    text-align: left;
+	width: 100px;
+	text-align: left;
 }
 
 @media (max-width: 500px) {

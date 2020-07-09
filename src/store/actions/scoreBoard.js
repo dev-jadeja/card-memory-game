@@ -21,7 +21,7 @@ export const fetchScoreBoardFail = (error) => {
 	};
 };
 
-export const fetchScoreBoard = (token, userId) => {
+export const fetchScoreBoard = (token, userId, level) => {
 	return (dispatch) => {
 		dispatch(fetchScoreBoardStart());
 		const queryParams =
@@ -37,13 +37,15 @@ export const fetchScoreBoard = (token, userId) => {
 					});
 				}
 
-				fetchedScoreList.sort((prev, next) => {
+				let updatedScoreList = fetchedScoreList.filter((score) => score.type === level);
+
+				updatedScoreList.sort((prev, next) => {
 					return prev.moves > next.moves ? 1 : -1;
 				});
 
-				if (fetchedScoreList.length > 10)
-					fetchedScoreList.splice(10, fetchedScoreList.length - 10);
-				dispatch(fetchScoreBoardSuccess(fetchedScoreList));
+				if (updatedScoreList.length > 10)
+					updatedScoreList.splice(10, updatedScoreList.length - 10);
+				dispatch(fetchScoreBoardSuccess(updatedScoreList));
 			})
 			.catch((err) => {
 				dispatch(fetchScoreBoardFail(err));
@@ -75,7 +77,7 @@ export const sendScoreFailHome = () => {
 	};
 };
 
-export const sendScore = (score, token, userId) => {
+export const sendScore = (score, token, userId, type) => {
 	return (dispatch) => {
 		dispatch(sendScoreStart());
 		const fullDate = new Date();
@@ -86,6 +88,7 @@ export const sendScore = (score, token, userId) => {
 				fullDate.getMonth() + 1
 			}/${fullDate.getFullYear()}`,
 			userId: userId,
+			type: type,
 		};
 
 		axios
@@ -99,3 +102,16 @@ export const sendScore = (score, token, userId) => {
 			});
 	};
 };
+
+export const setBackToHome = () => {
+	return {
+		type: actionTypes.SET_BACK_TO_HOME,
+	};
+};
+
+export const setLevel = (level) => {
+	return {
+		type: actionTypes.SET_LEVEL,
+		level: level,
+	};
+}
