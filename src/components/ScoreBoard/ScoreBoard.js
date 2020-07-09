@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import Spinner from "../../../UI/Spinner/Spinner";
-import * as actions from "../../../store/actions/index";
+import Spinner from "../../UI/Spinner/Spinner";
+import * as actions from "../../store/actions/index";
 import { connect } from "react-redux";
 
 function ScoreBoard(props) {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import classes from "./Home.module.css";
-import ScoreBoard from "./ScoreBoard/ScoreBoard";
+import ScoreBoard from "../../components/ScoreBoard/ScoreBoard";
 import { Redirect, NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";

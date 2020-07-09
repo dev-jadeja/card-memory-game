@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import cardsGenerator from "../../supplementary/CardsGenerator";
 import classes from "./Board.module.css";
 import Card from "../../components/Card/Card";
-import Dialog from "../Dialog/Dialog";
+import Dialog from "../../components/Dialog/Dialog";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import Spinner from "../../UI/Spinner/Spinner";
