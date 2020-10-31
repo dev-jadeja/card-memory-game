@@ -14,7 +14,7 @@ import { connect } from "react-redux";
 const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction="up" ref={ref} {...props} />;
 });
-
+//sample comment that you dont need to see 
 function AlertDialogSlide(props) {
 
 	const clickedBackToHome = () => {
