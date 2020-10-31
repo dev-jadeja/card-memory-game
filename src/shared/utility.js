@@ -35,3 +35,19 @@ export const checkValidity = ( value, rules ) => {
 
     return isValid;
 }
+	//sample comment that you dont need to see 
+	//sample comment that you dont need to see 
+	//sample comment that you dont need to see 
+	//sample comment that you dont need to see 
+	//sample comment that you dont need to see 
+	//sample comment that you dont need to see 	//sample comment that you dont need to see 
+	//sample comment that you dont need to see 
+	//sample comment that you dont need to see 
+	//sample comment that you dont need to see 
+	//sample comment that you dont need to see 
+	//sample comment that you dont need to see 	//sample comment that you dont need to see 
+	//sample comment that you dont need to see 
+	//sample comment that you dont need to see 
+	//sample comment that you dont need to see 
+	//sample comment that you dont need to see 
+	//sample comment that you dont need to see 
